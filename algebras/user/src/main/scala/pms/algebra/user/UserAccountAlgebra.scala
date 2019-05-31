@@ -25,6 +25,8 @@ trait UserAccountAlgebra[F[_]] {
 
   def invitationStep2(token: UserInviteToken, pw: PlainTextPassword): F[User]
 
+  def deleteUserInvitation(token: UserInviteToken): F[Unit]
+
   def resetPasswordStep1(email: Email): F[PasswordResetToken]
 
   def resetPasswordStep2(token: PasswordResetToken, newPassword: PlainTextPassword): F[Unit]

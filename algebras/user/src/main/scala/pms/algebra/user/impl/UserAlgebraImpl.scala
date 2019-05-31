@@ -84,6 +84,9 @@ final private[user] class UserAlgebraImpl[F[_]] private (
     cio.transact(transactor)
   }
 
+  override def deleteUserInvitation(token: UserInviteToken): F[Unit] =
+    UserInvitationSQL.deleteByToken(token).transact(transactor)
+
   override def resetPasswordStep1(email: Email): F[PasswordResetToken] =
     for {
       token <- UserCrypto.generateToken(F)

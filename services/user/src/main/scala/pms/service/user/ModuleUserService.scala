@@ -2,6 +2,7 @@ package pms.service.user
 
 import pms.algebra.user._
 import pms.core.Module
+import pms.effects._
 import pms.email._
 
 /**
@@ -12,6 +13,8 @@ import pms.email._
   */
 trait ModuleUserService[F[_]] {
   this: Module[F] with ModuleUserAlgebra[F] with ModuleEmail[F] =>
+
+  implicit def timer: Timer[F]
 
   def userAccountService: F[UserAccountService[F]] = _userService
 
